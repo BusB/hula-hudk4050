@@ -1,0 +1,55 @@
+---
+title: "Untitled"
+author: "John Bylander"
+date: "12/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+max
+min 
+mean
+variance
+
+```{r read in data}
+library(readxl)
+names_vect <- list.files(path = "./hula hoop")
+DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE)
+start_end_times <- read_excel("./hula hoop/Records.xlsx")
+observation_names <- names_vect[grep("^.*_accm.*|^.*_gyrm.*", names_vect)]
+
+
+```
+
+```{exploratory dataviz}
+
+```
+
+```{r descriptive analysis}
+
+```
+
+```{r clustering analysis}
+
+```
+
+```{r tree model}
+
+```
+
+```{r PCA}
+
+```
+
+```{r logistic regression}
+
+```
+
+```{r}
+
+```
