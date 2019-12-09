@@ -24,19 +24,24 @@ names_vect <- list.files(path = "./hula hoop")
 DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE, stringsAsFactors = FALSE)
 start_end_times <- read_excel("./hula hoop/Records.xlsx")
 DF2 <- read.csv("./hula hoop/jeb1_gyrm.csv", header = TRUE, stringsAsFactors = FALSE)
+op <- options(digits.secs=3)
 observation_time <- paste(DF1[1,2:3], collapse = " ")
+observation_time <- gsub("(.*:.*:.*)(:)","\\1\\.",observation_time)
+observation_time <- strptime(observation_time, "%B %d %Y %H:%M:%OS")
 
 DF1 <- DF1[-1,]
 DF1 <- DF1 %>% cbind(observation = "jeb1_accm",.) %>% 
-  separate(observation, c("subject", "sensor_type")) %>% 
-  separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
-  cbind(observation_time, .)
+  separate(observation, c("subject", "sensor_type"))
+subject_temp <- DF1$subject
+DF1 <- DF1 %>% separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])")
+DF1$attempt_code <- subject_temp
 
 DF2 <- DF2[-1,]
 DF2 <- DF2 %>% cbind(observation = "jeb1_gyrm",.) %>% 
-  separate(observation, c("subject", "sensor_type")) %>% 
-  separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
-  cbind(observation_time, .)
+  separate(observation, c("subject", "sensor_type"))
+subject_temp <- DF2$subject
+DF2 <- DF2 %>% separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])")
+DF2$attempt_code <- subject_temp
 
 obs_names_ac <- names_vect[grep("^.*_accm.*", names_vect)]
 obs_names_gy <- names_vect[grep("^.*_gyrm.*", names_vect)]
@@ -47,44 +52,64 @@ acceler_df <- DF1
 for(i in 1:length(obs_names_ac)){
   temp_df <- read.csv(paste("./hula hoop/",obs_names_ac[i], sep = ""), header = TRUE, stringsAsFactors = FALSE)
   observation_time <- paste(temp_df[1,2:3], collapse = " ")
+  observation_time <- gsub("(.*:.*:.*)(:)","\\1\\.",observation_time)
+  observation_time <- strptime(observation_time, "%B %d %Y %H:%M:%OS")
+  
   temp_df <- temp_df[-1,]
   temp_df <- temp_df %>% cbind(observation = c(gsub("\\.csv", "", obs_names_ac[i])),.) %>%
-    separate(observation, c("subject", "sensor_type")) %>%
-    separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
-    cbind(observation_time, .)
+    separate(observation, c("subject", "sensor_type"))
+  subject_temp <- temp_df$subject
+  temp_df <- temp_df %>% separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])")
+  temp_df$attempt_code <- subject_temp
+  
   acceler_df <- bind_rows(acceler_df,temp_df)
 }
-acceler_df$observation_time <- as.factor(acceler_df$observation_time)
 acceler_df$subject <- as.factor(acceler_df$subject)
 acceler_df$attempt_code <- as.factor(acceler_df$attempt_code)
 acceler_df$sensor_type <- as.factor(acceler_df$sensor_type)
+acceler_df$time <- as.numeric(acceler_df$time)
+acceler_df$time <- observation_time + acceler_df$time
+acceler_df$X_value <- as.numeric(acceler_df$X_value)
+acceler_df$Y_value <- as.numeric(acceler_df$Y_value)
+acceler_df$Z_value <- as.numeric(acceler_df$Z_value)
+
 acceler_df <- filter(acceler_df, TRUE)
 
 gyro_df <- DF2
 for(i in 1:length(obs_names_gy)){
   temp_df <- read.csv(paste("./hula hoop/",obs_names_gy[i], sep = ""), header = TRUE, stringsAsFactors = FALSE)
   observation_time <- paste(temp_df[1,2:3], collapse = " ")
+  observation_time <- gsub("(.*:.*:.*)(:)","\\1\\.",observation_time)
+  observation_time <- strptime(observation_time, "%B %d %Y %H:%M:%OS")
+  
   temp_df <- temp_df[-1,]
   temp_df <- temp_df %>% cbind(observation = c(gsub("\\.csv", "", obs_names_ac[i])),.) %>%
-    separate(observation, c("subject", "sensor_type")) %>%
-    separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
-    cbind(observation_time, .)
-  gyro_df <- bind_rows(gyro_df,temp_df)
+    separate(observation, c("subject", "sensor_type"))
+  subject_temp <- temp_df$subject
+  temp_df <- temp_df %>% separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])")
+  temp_df$attempt_code <- subject_temp
 }
 
-gyro_df$observation_time <- as.factor(gyro_df$observation_time)
 gyro_df$subject <- as.factor(gyro_df$subject)
 gyro_df$attempt_code <- as.factor(gyro_df$attempt_code)
 gyro_df$sensor_type <- as.factor(gyro_df$sensor_type)
+gyro_df$time <- as.numeric(gyro_df$time)
+gyro_df$time <- observation_time + gyro_df$time
+gyro_df$X_value <- as.numeric(gyro_df$X_value)
+gyro_df$Y_value <- as.numeric(gyro_df$Y_value)
+gyro_df$Z_value <- as.numeric(gyro_df$Z_value)
 gyro_df <- filter(gyro_df, TRUE)
 
 ```
 
 ```{r exploratory dataviz}
 library(tidyverse)
-testing_df <- filter(acceler_df,subject == "la")
+library(ggplot2)
+library(scales)
+testing_df <- filter(acceler_df,subject == c("la","jeb","yy"))
+testing_df <- testing_df %>% group_by(attempt_code) 
 plot(testing_df$X_value, type = "l")
-
+ggplot(testing_df,aes(time, X_value)) + geom_line(aes(col = attempt_code)) + scale_x_datetime(breaks=date_breaks(".5 sec"))
 ```
 
 ```{r descriptive analysis}
