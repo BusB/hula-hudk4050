@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## R Markdown
 
+I'm using this as scratch space for now. Here are some of the things we want to study for our data:
 max
 min 
 mean
@@ -19,14 +20,69 @@ variance
 ```{r read in data}
 library(readxl)
 names_vect <- list.files(path = "./hula hoop")
-DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE)
+DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE, stringsAsFactors = FALSE)
 start_end_times <- read_excel("./hula hoop/Records.xlsx")
-observation_names <- names_vect[grep("^.*_accm.*|^.*_gyrm.*", names_vect)]
+DF2 <- read.csv("./hula hoop/jeb1_gyrm.csv", header = TRUE, stringsAsFactors = FALSE)
+observation_time <- paste(DF1[1,2:3], collapse = " ")
 
+DF1 <- DF1[-1,]
+DF1 <- DF1 %>% cbind(observation = "jeb1_accm",.) %>% 
+  separate(observation, c("subject", "sensor_type")) %>% 
+  separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
+  cbind(observation_time, .)
+
+DF2 <- DF2[-1,]
+DF2 <- DF2 %>% cbind(observation = "jeb1_gyrm",.) %>% 
+  separate(observation, c("subject", "sensor_type")) %>% 
+  separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
+  cbind(observation_time, .)
+
+obs_names_ac <- names_vect[grep("^.*_accm.*", names_vect)]
+obs_names_gy <- names_vect[grep("^.*_gyrm.*", names_vect)]
+obs_names_ac <- obs_names_ac[obs_names_ac != "jeb1_accm.csv"]
+obs_names_gy <- obs_names_gy[obs_names_ac != "jeb1_gyrm.csv"]
+
+acceler_df <- DF1
+for(i in 1:length(obs_names_ac)){
+  temp_df <- read.csv(paste("./hula hoop/",obs_names_ac[i], sep = ""), header = TRUE, stringsAsFactors = FALSE)
+  observation_time <- paste(temp_df[1,2:3], collapse = " ")
+  temp_df <- temp_df[-1,]
+  temp_df <- temp_df %>% cbind(observation = c(gsub("\\.csv", "", obs_names_ac[i])),.) %>%
+    separate(observation, c("subject", "sensor_type")) %>%
+    separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
+    cbind(observation_time, .)
+  acceler_df <- bind_rows(acceler_df,temp_df)
+}
+acceler_df$observation_time <- as.factor(acceler_df$observation_time)
+acceler_df$subject <- as.factor(acceler_df$subject)
+acceler_df$attempt_code <- as.factor(acceler_df$attempt_code)
+acceler_df$sensor_type <- as.factor(acceler_df$sensor_type)
+acceler_df <- filter(acceler_df, TRUE)
+
+gyro_df <- DF2
+for(i in 1:length(obs_names_gy)){
+  temp_df <- read.csv(paste("./hula hoop/",obs_names_gy[i], sep = ""), header = TRUE, stringsAsFactors = FALSE)
+  observation_time <- paste(temp_df[1,2:3], collapse = " ")
+  temp_df <- temp_df[-1,]
+  temp_df <- temp_df %>% cbind(observation = c(gsub("\\.csv", "", obs_names_ac[i])),.) %>%
+    separate(observation, c("subject", "sensor_type")) %>%
+    separate(subject, c("subject", "attempt_code"),"(?<=[a-z])(?=[0-9])") %>%
+    cbind(observation_time, .)
+  gyro_df <- bind_rows(gyro_df,temp_df)
+}
+
+gyro_df$observation_time <- as.factor(gyro_df$observation_time)
+gyro_df$subject <- as.factor(gyro_df$subject)
+gyro_df$attempt_code <- as.factor(gyro_df$attempt_code)
+gyro_df$sensor_type <- as.factor(gyro_df$sensor_type)
+gyro_df <- filter(gyro_df, TRUE)
 
 ```
 
-```{exploratory dataviz}
+```{r exploratory dataviz}
+library(tidyverse)
+testing_df <- filter(acceler_df,subject == "la")
+plot(testing_df$X_value, type = "l")
 
 ```
 
