@@ -18,6 +18,7 @@ mean
 variance
 
 ```{r read in data}
+library(tidyverse)
 library(readxl)
 names_vect <- list.files(path = "./hula hoop")
 DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE, stringsAsFactors = FALSE)
