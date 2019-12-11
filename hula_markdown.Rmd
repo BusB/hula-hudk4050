@@ -23,113 +23,7 @@ DF1 <- read.csv("./hula hoop/jeb1_accm.csv", header = TRUE)
 start_end_times <- read_excel("./hula hoop/Records.xlsx")
 observation_names <- names_vect[grep("^.*_accm.*|^.*_gyrm.*", names_vect)]
 
-jeb1_accm <- read.csv("./hula hoop/jeb1_accm.csv")[-1,]
-jeb3_accm <- read.csv("./hula hoop/jeb3_accm.csv")[-1,]
-jeb1_grvm <- read.csv("./hula hoop/jeb1_grvm.csv")[-1,]
-jeb3_grvm <- read.csv("./hula hoop/jeb3_grvm.csv")[-1,]
 
-la1wc_accm <- read.csv("./hula hoop/la1wC_accm.csv")[-1,]
-la1wc_grvm <- read.csv("./hula hoop/la1wC_grvm.csv")[-1,]
-la2_accm <- read.csv("./hula hoop/la2_accm.csv")[-1,]
-la2_grvm <- read.csv("./hula hoop/la2_grvm.csv")[-1,]
-
-xs1_accm <- read.csv("./hula hoop/xs1_accm.csv")[-1,]
-xs1_grvm <- read.csv("./hula hoop/xs1_grvm.csv")[-1,]
-xs2_accm <- read.csv("./hula hoop/xs2_accm.csv")[-1,]
-xs2_grvm <- read.csv("./hula hoop/xs2_grvm.csv")[-1,]
-
-ym1_accm <- read.csv("./hula hoop/ym1_accm.csv")[-1,]
-ym1_grvm <- read.csv("./hula hoop/ym1_grvm.csv")[-1,]
-ym2_accm <- read.csv("./hula hoop/ym2_accm.csv")[-1,]
-ym2_grvm <- read.csv("./hula hoop/ym2_grvm.csv")[-1,]
-
-ywz1wC_accm <- read.csv("./hula hoop/ywz1wC_accm.csv")[-1,]
-ywz1wC_grvm <- read.csv("./hula hoop/ywz1wC_grvm.csv")[-1,]
-ywz2_accm <- read.csv("./hula hoop/ywz2_accm.csv")[-1,]
-ywz2_grvm <- read.csv("./hula hoop/ywz2_grvm.csv")[-1,]
-
-yy1again_accm <- read.csv("./hula hoop/yy1again_accm.csv")[-1,]
-yy1again_grvm <- read.csv("./hula hoop/yy1again_grvm.csv")[-1,]
-yy2_accm <- read.csv("./hula hoop/yy2_accm.csv")[-1,]
-yy2_grvm <- read.csv("./hula hoop/yy2_grvm.csv")[-1,]
-
-zxm1_accm <- read.csv("./hula hoop/zxm1_accm.csv")[-1,]
-zxm1_grvm <- read.csv("./hula hoop/zxm1_grvm.csv")[-1,]
-zxm2_accm <- read.csv("./hula hoop/zxm2_accm.csv")[-1,]
-zxm2_grvm <- read.csv("./hula hoop/zxm2_grvm.csv")[-1,]
-
-jeb1_accm <-jeb1_accm[(as.numeric(as.character(jeb1_accm$time))>13 & as.numeric(as.character(jeb1_accm$time))<16.63),]
-jeb1_grvm <-jeb1_grvm[(as.numeric(as.character(jeb1_grvm$time))>13 & as.numeric(as.character(jeb1_grvm$time))<16.63),]
-jeb3_accm <-jeb3_accm[(as.numeric(as.character(jeb3_accm$time))>17.5 & as.numeric(as.character(jeb3_accm$time))<30.27),]
-jeb3_grvm <-jeb3_grvm[(as.numeric(as.character(jeb3_grvm$time))>17.5 & as.numeric(as.character(jeb3_grvm$time))<30.27),]
-
-la1wc_accm <-la1wc_accm[(as.numeric(as.character(la1wc_accm$time))>14 & as.numeric(as.character(la1wc_accm$time))<34),]
-la1wc_grvm <-la1wc_grvm[(as.numeric(as.character(la1wc_grvm$time))>14 & as.numeric(as.character(la1wc_grvm$time))<34),]
-la2_accm <-la2_accm[(as.numeric(as.character(la2_accm$time))>7 & as.numeric(as.character(la2_accm$time))<67),]
-la2_grvm <-la2_grvm[(as.numeric(as.character(la2_grvm$time))>7 & as.numeric(as.character(la2_grvm$time))<67),]
-
-xs1_accm <-xs1_accm[(as.numeric(as.character(xs1_accm$time))>10 & as.numeric(as.character(xs1_accm$time))<15.55),]
-xs1_grvm <-xs1_grvm[(as.numeric(as.character(xs1_grvm$time))>10 & as.numeric(as.character(xs1_grvm$time))<15.55),]
-xs2_accm <-xs2_accm[(as.numeric(as.character(xs2_accm$time))>18 & as.numeric(as.character(xs2_accm$time))<78),]
-xs2_grvm <-xs2_grvm[(as.numeric(as.character(xs2_grvm$time))>18 & as.numeric(as.character(xs2_grvm$time))<78),]
-
-ym1_accm <-ym1_accm[(as.numeric(as.character(ym1_accm$time))>33 &as.numeric(as.character(ym1_accm$time))<35.02),]
-ym1_grvm <-ym1_grvm[(as.numeric(as.character(ym1_grvm$time))>33 &as.numeric(as.character(ym1_grvm$time))<35.02),]
-ym2_accm <-ym2_accm[(as.numeric(as.character(ym2_accm$time))>11.5 &as.numeric(as.character(ym2_accm$time))<18.68),]
-ym2_grvm <-ym2_grvm[(as.numeric(as.character(ym2_grvm$time))>11.5 &as.numeric(as.character(ym2_grvm$time))<18.68),]
-
-
-ywz1wC_accm <-ywz1wC_accm[(as.numeric(as.character(ywz1wC_accm$time))>69.5 &as.numeric(as.character(ywz1wC_accm$time))<78.25),]
-ywz1wC_grvm <-ywz1wC_grvm[(as.numeric(as.character(ywz1wC_grvm$time))>69.5 &
-as.numeric(as.character(ywz1wC_grvm$time))<78.25),]
-ywz2_accm <-ywz2_accm[(as.numeric(as.character(ywz2_accm$time))>10 &as.numeric(as.character(ywz2_accm$time))<70),]
-ywz2_grvm <-ywz2_grvm[(as.numeric(as.character(ywz2_grvm$time))>10 &as.numeric(as.character(ywz2_grvm$time))<70),]
-
-yy1again_accm <-yy1again_accm[(as.numeric(as.character(yy1again_accm$time))>10 & as.numeric(as.character(yy1again_accm$time))<28.82),]
-yy1again_grvm <-yy1again_grvm[(as.numeric(as.character(yy1again_grvm$time))>10 & as.numeric(as.character(yy1again_grvm$time))<28.82),]
-yy2_accm <-yy2_accm[(as.numeric(as.character(yy2_accm$time))>12 &as.numeric(as.character(yy2_accm$time))<72),]
-yy2_grvm <-yy2_grvm[(as.numeric(as.character(yy2_grvm$time))>12 &as.numeric(as.character(yy2_grvm$time))<72),]
-
-zxm1_accm <-zxm1_accm[(as.numeric(as.character(zxm1_accm$time))>18 & as.numeric(as.character(zxm1_accm$time))<22.24),]
-zxm1_grvm <-zxm1_grvm[(as.numeric(as.character(zxm1_grvm$time))>18 & as.numeric(as.character(zxm1_grvm$time))<22.24),]
-zxm2_accm <-zxm2_accm[(as.numeric(as.character(zxm2_accm$time))>49.4 & as.numeric(as.character(zxm2_accm$time))<59.65),]
-zxm2_grvm <-zxm2_grvm[(as.numeric(as.character(zxm2_grvm$time))>49.4 & as.numeric(as.character(zxm2_grvm$time))<59.65),]
-
-novice1_accm <- do.call("rbind",list(jeb1_accm, xs1_accm, zxm1_accm, ym1_accm))
-novice1_accm$X_value <- as.numeric(as.character(novice1_accm$X_value))
-novice1_accm$Y_value <- as.numeric(as.character(novice1_accm$Y_value))
-novice1_accm$Z_value <- as.numeric(as.character(novice1_accm$Z_value))
-novice1_grvm <- do.call("rbind", list(jeb1_grvm, xs1_grvm, zxm1_grvm, ym1_grvm))
-novice1_grvm$X_value <- as.numeric(as.character(novice1_grvm$X_value))
-novice1_grvm$Y_value <- as.numeric(as.character(novice1_grvm$Y_value))
-novice1_grvm$Z_value <- as.numeric(as.character(novice1_grvm$Z_value))
-
-expert1_accm <- do.call("rbind",list(la1wc_accm, yy1again_accm, ywz1wC_accm))
-expert1_accm$X_value <- as.numeric(as.character(expert1_accm$X_value))
-expert1_accm$Y_value <- as.numeric(as.character(expert1_accm$Y_value))
-expert1_accm$Z_value <- as.numeric(as.character(expert1_accm$Z_value))
-expert1_grvm <- do.call("rbind",list(la1wc_grvm, yy1again_grvm, ywz1wC_grvm))
-expert1_grvm$X_value <- as.numeric(as.character(expert1_grvm$X_value))
-expert1_grvm$Y_value <- as.numeric(as.character(expert1_grvm$Y_value))
-expert1_grvm$Z_value <- as.numeric(as.character(expert1_grvm$Z_value))
-
-novice2_accm <- do.call("rbind",list(jeb3_accm, xs2_accm, zxm2_accm, ym2_accm))
-novice2_accm$X_value <- as.numeric(as.character(novice2_accm$X_value))
-novice2_accm$Y_value <- as.numeric(as.character(novice2_accm$Y_value))
-novice2_accm$Z_value <- as.numeric(as.character(novice2_accm$Z_value))
-novice2_grvm <- do.call("rbind", list(jeb3_grvm, xs2_grvm, zxm2_grvm, ym2_grvm))
-novice2_grvm$X_value <- as.numeric(as.character(novice2_grvm$X_value))
-novice2_grvm$Y_value <- as.numeric(as.character(novice2_grvm$Y_value))
-novice2_grvm$Z_value <- as.numeric(as.character(novice2_grvm$Z_value))
-
-expert2_accm <- do.call("rbind",list(la2_accm, yy2_accm, ywz2_accm))
-expert2_accm$X_value <- as.numeric(as.character(expert2_accm$X_value))
-expert2_accm$Y_value <- as.numeric(as.character(expert2_accm$Y_value))
-expert2_accm$Z_value <- as.numeric(as.character(expert2_accm$Z_value))
-expert2_grvm <- do.call("rbind",list(la2_grvm, yy2_grvm, ywz2_grvm))
-expert2_grvm$X_value <- as.numeric(as.character(expert2_grvm$X_value))
-expert2_grvm$Y_value <- as.numeric(as.character(expert2_grvm$Y_value))
-expert2_grvm$Z_value <- as.numeric(as.character(expert2_grvm$Z_value))
 ```
 
 ```{rexploratory dataviz}
@@ -138,6 +32,115 @@ expert2_grvm$Z_value <- as.numeric(as.character(expert2_grvm$Z_value))
 ```
 
 ```{r descriptive analysis}
+#data cleaning
+jeb1_accm <- read.csv("./hula hoop/jeb1_accm.csv")[-1,]
+jeb3_accm <- read.csv("./hula hoop/jeb3_accm.csv")[-1,]
+jeb1_gyrm <- read.csv("./hula hoop/jeb1_gyrm.csv")[-1,]
+jeb3_gyrm <- read.csv("./hula hoop/jeb3_gyrm.csv")[-1,]
+
+la1wc_accm <- read.csv("./hula hoop/la1wC_accm.csv")[-1,]
+la1wc_gyrm <- read.csv("./hula hoop/la1wC_gyrm.csv")[-1,]
+la2_accm <- read.csv("./hula hoop/la2_accm.csv")[-1,]
+la2_gyrm <- read.csv("./hula hoop/la2_gyrm.csv")[-1,]
+
+xs1_accm <- read.csv("./hula hoop/xs1_accm.csv")[-1,]
+xs1_gyrm <- read.csv("./hula hoop/xs1_gyrm.csv")[-1,]
+xs2_accm <- read.csv("./hula hoop/xs2_accm.csv")[-1,]
+xs2_gyrm <- read.csv("./hula hoop/xs2_gyrm.csv")[-1,]
+
+ym1_accm <- read.csv("./hula hoop/ym1_accm.csv")[-1,]
+ym1_gyrm <- read.csv("./hula hoop/ym1_gyrm.csv")[-1,]
+ym2_accm <- read.csv("./hula hoop/ym2_accm.csv")[-1,]
+ym2_gyrm <- read.csv("./hula hoop/ym2_gyrm.csv")[-1,]
+
+ywz1wC_accm <- read.csv("./hula hoop/ywz1wC_accm.csv")[-1,]
+ywz1wC_gyrm <- read.csv("./hula hoop/ywz1wC_gyrm.csv")[-1,]
+ywz2_accm <- read.csv("./hula hoop/ywz2_accm.csv")[-1,]
+ywz2_gyrm <- read.csv("./hula hoop/ywz2_gyrm.csv")[-1,]
+
+yy1again_accm <- read.csv("./hula hoop/yy1again_accm.csv")[-1,]
+yy1again_gyrm <- read.csv("./hula hoop/yy1again_gyrm.csv")[-1,]
+yy2_accm <- read.csv("./hula hoop/yy2_accm.csv")[-1,]
+yy2_gyrm <- read.csv("./hula hoop/yy2_gyrm.csv")[-1,]
+
+zxm1_accm <- read.csv("./hula hoop/zxm1_accm.csv")[-1,]
+zxm1_gyrm <- read.csv("./hula hoop/zxm1_gyrm.csv")[-1,]
+zxm2_accm <- read.csv("./hula hoop/zxm2_accm.csv")[-1,]
+zxm2_gyrm <- read.csv("./hula hoop/zxm2_gyrm.csv")[-1,]
+
+jeb1_accm <-jeb1_accm[(as.numeric(as.character(jeb1_accm$time))>13 & as.numeric(as.character(jeb1_accm$time))<16.63),]
+jeb1_gyrm <-jeb1_gyrm[(as.numeric(as.character(jeb1_gyrm$time))>13 & as.numeric(as.character(jeb1_gyrm$time))<16.63),]
+jeb3_accm <-jeb3_accm[(as.numeric(as.character(jeb3_accm$time))>17.5 & as.numeric(as.character(jeb3_accm$time))<30.27),]
+jeb3_gyrm <-jeb3_gyrm[(as.numeric(as.character(jeb3_gyrm$time))>17.5 & as.numeric(as.character(jeb3_gyrm$time))<30.27),]
+
+la1wc_accm <-la1wc_accm[(as.numeric(as.character(la1wc_accm$time))>14 & as.numeric(as.character(la1wc_accm$time))<34),]
+la1wc_gyrm <-la1wc_gyrm[(as.numeric(as.character(la1wc_gyrm$time))>14 & as.numeric(as.character(la1wc_gyrm$time))<34),]
+la2_accm <-la2_accm[(as.numeric(as.character(la2_accm$time))>7 & as.numeric(as.character(la2_accm$time))<67),]
+la2_gyrm <-la2_gyrm[(as.numeric(as.character(la2_gyrm$time))>7 & as.numeric(as.character(la2_gyrm$time))<67),]
+
+xs1_accm <-xs1_accm[(as.numeric(as.character(xs1_accm$time))>10 & as.numeric(as.character(xs1_accm$time))<15.55),]
+xs1_gyrm <-xs1_gyrm[(as.numeric(as.character(xs1_gyrm$time))>10 & as.numeric(as.character(xs1_gyrm$time))<15.55),]
+xs2_accm <-xs2_accm[(as.numeric(as.character(xs2_accm$time))>18 & as.numeric(as.character(xs2_accm$time))<78),]
+xs2_gyrm <-xs2_gyrm[(as.numeric(as.character(xs2_gyrm$time))>18 & as.numeric(as.character(xs2_gyrm$time))<78),]
+
+ym1_accm <-ym1_accm[(as.numeric(as.character(ym1_accm$time))>33 &as.numeric(as.character(ym1_accm$time))<35.02),]
+ym1_gyrm <-ym1_gyrm[(as.numeric(as.character(ym1_gyrm$time))>33 &as.numeric(as.character(ym1_gyrm$time))<35.02),]
+ym2_accm <-ym2_accm[(as.numeric(as.character(ym2_accm$time))>11.5 &as.numeric(as.character(ym2_accm$time))<18.68),]
+ym2_gyrm <-ym2_gyrm[(as.numeric(as.character(ym2_gyrm$time))>11.5 &as.numeric(as.character(ym2_gyrm$time))<18.68),]
+
+
+ywz1wC_accm <-ywz1wC_accm[(as.numeric(as.character(ywz1wC_accm$time))>69.5 &as.numeric(as.character(ywz1wC_accm$time))<78.25),]
+ywz1wC_gyrm <-ywz1wC_gyrm[(as.numeric(as.character(ywz1wC_gyrm$time))>69.5 &
+as.numeric(as.character(ywz1wC_gyrm$time))<78.25),]
+ywz2_accm <-ywz2_accm[(as.numeric(as.character(ywz2_accm$time))>10 &as.numeric(as.character(ywz2_accm$time))<70),]
+ywz2_gyrm <-ywz2_gyrm[(as.numeric(as.character(ywz2_gyrm$time))>10 &as.numeric(as.character(ywz2_gyrm$time))<70),]
+
+yy1again_accm <-yy1again_accm[(as.numeric(as.character(yy1again_accm$time))>10 & as.numeric(as.character(yy1again_accm$time))<28.82),]
+yy1again_gyrm <-yy1again_gyrm[(as.numeric(as.character(yy1again_gyrm$time))>10 & as.numeric(as.character(yy1again_gyrm$time))<28.82),]
+yy2_accm <-yy2_accm[(as.numeric(as.character(yy2_accm$time))>12 &as.numeric(as.character(yy2_accm$time))<72),]
+yy2_gyrm <-yy2_gyrm[(as.numeric(as.character(yy2_gyrm$time))>12 &as.numeric(as.character(yy2_gyrm$time))<72),]
+
+zxm1_accm <-zxm1_accm[(as.numeric(as.character(zxm1_accm$time))>18 & as.numeric(as.character(zxm1_accm$time))<22.24),]
+zxm1_gyrm <-zxm1_gyrm[(as.numeric(as.character(zxm1_gyrm$time))>18 & as.numeric(as.character(zxm1_gyrm$time))<22.24),]
+zxm2_accm <-zxm2_accm[(as.numeric(as.character(zxm2_accm$time))>49.4 & as.numeric(as.character(zxm2_accm$time))<59.65),]
+zxm2_gyrm <-zxm2_gyrm[(as.numeric(as.character(zxm2_gyrm$time))>49.4 & as.numeric(as.character(zxm2_gyrm$time))<59.65),]
+
+novice1_accm <- do.call("rbind",list(jeb1_accm, xs1_accm, zxm1_accm, ym1_accm))
+novice1_accm$X_value <- as.numeric(as.character(novice1_accm$X_value))
+novice1_accm$Y_value <- as.numeric(as.character(novice1_accm$Y_value))
+novice1_accm$Z_value <- as.numeric(as.character(novice1_accm$Z_value))
+novice1_gyrm <- do.call("rbind", list(jeb1_gyrm, xs1_gyrm, zxm1_gyrm, ym1_gyrm))
+novice1_gyrm$X_value <- as.numeric(as.character(novice1_gyrm$X_value))
+novice1_gyrm$Y_value <- as.numeric(as.character(novice1_gyrm$Y_value))
+novice1_gyrm$Z_value <- as.numeric(as.character(novice1_gyrm$Z_value))
+
+expert1_accm <- do.call("rbind",list(la1wc_accm, yy1again_accm, ywz1wC_accm))
+expert1_accm$X_value <- as.numeric(as.character(expert1_accm$X_value))
+expert1_accm$Y_value <- as.numeric(as.character(expert1_accm$Y_value))
+expert1_accm$Z_value <- as.numeric(as.character(expert1_accm$Z_value))
+expert1_gyrm <- do.call("rbind",list(la1wc_gyrm, yy1again_gyrm, ywz1wC_gyrm))
+expert1_gyrm$X_value <- as.numeric(as.character(expert1_gyrm$X_value))
+expert1_gyrm$Y_value <- as.numeric(as.character(expert1_gyrm$Y_value))
+expert1_gyrm$Z_value <- as.numeric(as.character(expert1_gyrm$Z_value))
+
+novice2_accm <- do.call("rbind",list(jeb3_accm, xs2_accm, zxm2_accm, ym2_accm))
+novice2_accm$X_value <- as.numeric(as.character(novice2_accm$X_value))
+novice2_accm$Y_value <- as.numeric(as.character(novice2_accm$Y_value))
+novice2_accm$Z_value <- as.numeric(as.character(novice2_accm$Z_value))
+novice2_gyrm <- do.call("rbind", list(jeb3_gyrm, xs2_gyrm, zxm2_gyrm, ym2_gyrm))
+novice2_gyrm$X_value <- as.numeric(as.character(novice2_gyrm$X_value))
+novice2_gyrm$Y_value <- as.numeric(as.character(novice2_gyrm$Y_value))
+novice2_gyrm$Z_value <- as.numeric(as.character(novice2_gyrm$Z_value))
+
+expert2_accm <- do.call("rbind",list(la2_accm, yy2_accm, ywz2_accm))
+expert2_accm$X_value <- as.numeric(as.character(expert2_accm$X_value))
+expert2_accm$Y_value <- as.numeric(as.character(expert2_accm$Y_value))
+expert2_accm$Z_value <- as.numeric(as.character(expert2_accm$Z_value))
+expert2_gyrm <- do.call("rbind",list(la2_gyrm, yy2_gyrm, ywz2_gyrm))
+expert2_gyrm$X_value <- as.numeric(as.character(expert2_gyrm$X_value))
+expert2_gyrm$Y_value <- as.numeric(as.character(expert2_gyrm$Y_value))
+expert2_gyrm$Z_value <- as.numeric(as.character(expert2_gyrm$Z_value))
+
 #seperation criteria: average of "number of rotation" of 1st round = 14
 record <- read_excel("./hula hoop/Records.xlsx")
 names(record)[2] <- "nb_rotation"
@@ -151,14 +154,40 @@ aggregate(round2$`length of time(Sec.)`, list(round2$subgroup), mean)
 #install.packages("psych")
 library(psych)
 novice1_accm_result <- describe(novice1_accm[,2:4])
-novice1_grvm_result <- describe(novice1_grvm[,2:4])
+novice1_gyrm_result <- describe(novice1_gyrm[,2:4])
 expert1_accm_result <- describe(expert1_accm[,2:4])
-expert1_grvm_result <- describe(expert1_grvm[,2:4])
+expert1_gyrm_result <- describe(expert1_gyrm[,2:4])
 
 novice2_accm_result <- describe(novice2_accm[,2:4])
-novice2_grvm_result <- describe(novice2_grvm[,2:4])
+novice2_gyrm_result <- describe(novice2_gyrm[,2:4])
 expert2_accm_result <- describe(expert2_accm[,2:4])
-expert2_grvm_result <- describe(expert2_grvm[,2:4])
+expert2_gyrm_result <- describe(expert2_gyrm[,2:4])
+
+#install.packages("ggplot2")
+library('ggplot2')
+#compare SD value of novice and expert group on 1st round
+novice1_accm_result$identity = 'novice'
+expert1_accm_result$identity = 'expert'
+accm_result_new <- rbind(novice1_accm_result,expert1_accm_result)
+accm_result_new['X_value','dimension'] = 'x'
+accm_result_new['Y_value','dimension'] = 'y'
+accm_result_new['Z_value','dimension'] = 'z'
+accm_result_new['X_value1','dimension'] = 'x'
+accm_result_new['Y_value1','dimension'] = 'y'
+accm_result_new['Z_value1','dimension'] = 'z'
+ggplot(accm_result_new,aes(x=sd,color=dimension))+geom_histogram()+facet_wrap(~identity)
+
+#compare SD value of novice's 1st try and novice's 2nd round
+novice1_accm_result$identity = 'novice_before'
+novice2_accm_result$identity = 'novice_after'
+accm_novice_compare <- rbind(novice1_accm_result,novice2_accm_result)
+accm_novice_compare['X_value','dimension'] = 'x'
+accm_novice_compare['Y_value','dimension'] = 'y'
+accm_novice_compare['Z_value','dimension'] = 'z'
+accm_novice_compare['X_value1','dimension'] = 'x'
+accm_novice_compare['Y_value1','dimension'] = 'y'
+accm_novice_compare['Z_value1','dimension'] = 'z'
+ggplot(accm_novice_compare,aes(x=sd,color=dimension))+geom_histogram()+facet_wrap(~identity)
 ```
 
 ```{r clustering analysis}
